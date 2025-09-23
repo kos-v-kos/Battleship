@@ -1,5 +1,5 @@
 import random
-from typing import List, Tuple, Set, Optional
+from typing import List, Tuple, Optional
 
 
 class Ship:
@@ -124,25 +124,30 @@ class Game:
         
         raise RuntimeError(f"Failed to place ship of size {size} after {max_attempts} attempts")
 
-    def get_player_move(self) -> Tuple[int, int]:
+    def get_player_move(self) -> Tuple[int, int] | None:
         """Get valid coordinates from the player."""
         while True:
             try:
-                coords = input(f"Enter row and column (0-{self.board.size-1}), separated by space: ").split()
+                coords = input(f"Enter row and column (0-{self.board.size - 1}), separated by space: ").strip().split()
                 if len(coords) != 2:
                     print("Please enter exactly two numbers separated by a space.")
                     continue
-                    
+
                 x, y = map(int, coords)
-                
                 if not (0 <= x < self.board.size and 0 <= y < self.board.size):
-                    print(f"Both coordinates must be between 0 and {self.board.size-1}. Try again.")
+                    print(f"Coordinates must be between 0 and {self.board.size - 1}.")
                     continue
-                    
-                return x, y
-                
+
+                if (x, y) in self.board.hits or (x, y) in self.board.misses:
+                    print("You've already tried that position.")
+                    continue
+
+                return x, y  # This is the only return that matches the type hint
             except ValueError:
-                print("Please enter two numbers separated by a space (e.g., '3 4').")
+                print("Please enter valid numbers.")
+            except Exception as e:
+                print(f"An error occurred: {e}")
+                continue
 
     def play(self) -> None:
         """Main game loop."""

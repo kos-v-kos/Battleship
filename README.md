@@ -22,7 +22,7 @@ Battleship is a strategy type guessing game for two players. In this single-play
 ## Setup Instructions
 
 1. **Prerequisites**:
-   - Python 3.6 or higher
+   - Python 3.10 or higher
 
 2. **Installation**:
    ```bash
