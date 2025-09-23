@@ -1,18 +1,23 @@
 # Battleship Game
 
-A Python implementation of the classic Battleship board game, playable in the command line.
+A Python implementation of the classic Battleship board game, now with an object-oriented design, playable in the command line.
 
 ## Problem Description
 
-Battleship is a strategy type guessing game for two players. In this single-player version, you play against the computer, which randomly places ships on a hidden 10x10 grid. Your goal is to find and sink all the opponent's ships before running out of turns.
+Battleship is a strategy type guessing game for two players. In this single-player version, you play against the computer, which randomly places ships on a hidden 10x10 grid. Your goal is to find and sink all the opponent's ships in as few turns as possible.
 
 ## Features
 
-- 10x10 game board
-- Ships of varying sizes: 1x4, 2x3, 3x2, and 4x1
-- Clear visual feedback for hits, misses, and sunken ships
-- Game statistics (turns taken, hits, ships sunk)
-- Ships are placed with at least one cell of space between them
+- 🚢 10x10 game board with a clean command-line interface
+- ⚓ Ships of varying sizes: 
+  - 1x 4-cell ship
+  - 2x 3-cell ships
+  - 3x 2-cell ships
+  - 4x 1-cell ships
+- 🎯 Clear visual feedback for hits (`X`), misses (`O`), and sunken ships
+- 📊 Game statistics (turns taken, hits, ships sunk)
+- 🛡️ Ships are placed with at least one cell of space between them
+- 🔍 Debug mode to show ship positions (for testing)
 
 ## Setup Instructions
 
@@ -21,6 +26,9 @@ Battleship is a strategy type guessing game for two players. In this single-play
 
 2. **Installation**:
    ```bash
+   # Clone the repository (if applicable)
+   # git clone [repository-url]
+   
    # Navigate to the project directory
    cd /path/to/Battleship
    
@@ -40,35 +48,35 @@ Battleship is a strategy type guessing game for two players. In this single-play
      - `X` for hits
      - `O` for misses
      - ` ` (space) for untried cells
-   - You'll receive notifications when you sink a ship
+   - You'll receive notifications when you sink a ship, including the ship size
    - The game ends when all ships are sunk
 
-## Design Decisions
+## Object-Oriented Design
 
-### Architecture
-- **Modular Code**: The game is structured with clear separation of concerns into functions
-- **State Management**: The game state is maintained in a clear, consistent manner
+The game is built using a clean, object-oriented architecture with three main classes:
 
-### Key Components
-1. **Game Board**:
-   - 10x10 grid implemented as a 2D list
-   - Ships are placed randomly with proper spacing
-   - Visual representation adapts to show/hide ships based on context
+### 1. `Ship` Class
+- Manages individual ship state and behavior
+- Tracks ship position, hits, and sinking status
+- Provides methods for checking if a ship is at specific coordinates
 
-2. **Ship Management**:
-   - Ships are stored as dictionaries containing their cells, hit status, and size
-   - Ships can be placed horizontally or vertically
-   - Automatic detection of ship sinking
+### 2. `Board` Class
+- Manages the 10x10 game grid
+- Handles ship placement with proper spacing
+- Tracks hits, misses, and game state
+- Provides methods for displaying the board
 
-3. **Input/Output**:
-   - Simple command-line interface
-   - Clear visual feedback
-   - Helpful error messages for invalid inputs
+### 3. `Game` Class
+- Manages the overall game flow
+- Handles player input and turn management
+- Tracks game statistics and win conditions
+- Provides feedback and game state information
 
-### Algorithms
-- **Ship Placement**: Uses a recursive algorithm to ensure ships don't touch each other
-- **Hit Detection**: Efficiently checks and updates ship status
+### Key Algorithms
+- **Ship Placement**: Random placement with collision detection
+- **Hit Detection**: Efficient coordinate checking against ship positions
 - **Sinking Detection**: Tracks hits to determine when a ship is fully sunk
+- **Input Validation**: Ensures valid moves and provides helpful error messages
 
 ## Future Enhancements
 
