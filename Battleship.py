@@ -159,6 +159,7 @@ class Game:
         # Debug: Show initial board with ships
         print("Initial board with ships (for debugging):")
         self.board.display(show_ships=True)
+
         print("\nStarting game!")
 
         while not self.board.is_game_over():
